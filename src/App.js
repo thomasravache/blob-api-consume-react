@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import { upload } from './services';
+import { upload, readFile } from './services';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState('');
   const [fileToRead, setFileToRead] = useState('');
+  const [readURL, setReadURL] = useState('');
 
   const handleChangeUpload = ({ target: { files } }) => {
     console.log(files);
@@ -21,6 +22,11 @@ function App() {
 
     await upload(data);
   }
+
+  const read = async () => {
+    const { request: { responseURL } } = await readFile(fileToRead);
+    window.open(responseURL, '_blank');
+  };
 
   return (
     <div className="App">
@@ -40,7 +46,7 @@ function App() {
       <div>
         <h3>Read</h3>
         <input type="text" placeholder='informe o nome' onChange={(e) => handleChange(e, setFileToRead)}/>
-        <a href={`https://localhost:7241/file/read?fileName=${fileToRead}`} target='_blank' rel='noreferrer'>Ler Arquivo</a>
+        <button type='button' onClick={read}>teste</button>
       </div>
     </div>
   );

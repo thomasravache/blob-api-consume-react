@@ -5,3 +5,5 @@ const api = axios.create({
 });
 
 export const upload = async (file) => api.post('/file/upload', file);
+
+export const readFile = async (fileName) => api.get(`/file/read?fileName=${fileName}`);
