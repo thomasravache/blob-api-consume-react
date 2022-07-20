@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import { upload, readFile } from './services';
+import { uploadFile, readFile, downloadFile } from './services';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState('');
-  const [fileToRead, setFileToRead] = useState('');
+  const [fileToReadOrDownload, setFileToReadOrDownload] = useState('');
 
   const handleChangeUpload = ({ target: { files } }) => {
     console.log(files);
@@ -15,19 +15,28 @@ function App() {
     setState(value);
   };
 
-  const submit = async () => {
+  const upload = async () => {
     const data = new FormData();
     data.append('MyFile', selectedFile);
 
-    await upload(data);
+    await uploadFile(data);
   }
 
   const read = async () => {
     try {
-      const { request: { responseURL } } = await readFile(fileToRead);
+      const { request: { responseURL } } = await readFile(fileToReadOrDownload);
       window.open(responseURL, '_blank');
     } catch {
       console.log('deu ruim');
+    }
+  };
+
+  const download = async () => {
+    try {
+      const { request: { responseURL } } = await downloadFile(fileToReadOrDownload);
+      window.open(responseURL, '_self');
+    } catch {
+      console.log('ruim');
     }
   };
 
@@ -41,15 +50,17 @@ function App() {
           <input type="file" name="MyFile" onChange={handleChangeUpload} />
         </div>
         <div>
-          <button type="button" onClick={submit}>
+          <button type="button" onClick={upload}>
             Upload
           </button>
         </div>
       </div>
       <div>
-        <h3>Read</h3>
-        <input type="text" placeholder='informe o nome' onChange={(e) => handleChange(e, setFileToRead)}/>
+        <h3>Read or Download</h3>
+        <input type="text" placeholder='nomearquivo.pdf' value={fileToReadOrDownload} onChange={(e) => handleChange(e, setFileToReadOrDownload)}/>
+        <br></br>
         <button type='button' onClick={read}>Visualizar</button>
+        <button type='button' onClick={download}>Download</button>
       </div>
     </div>
   );
