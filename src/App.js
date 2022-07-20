@@ -45,7 +45,7 @@ function App() {
       <div>
         <h3>Read</h3>
         <input type="text" placeholder='informe o nome' onChange={(e) => handleChange(e, setFileToRead)}/>
-        <button type='button' onClick={read}>teste</button>
+        <button type='button' onClick={read}>Visualizar</button>
       </div>
     </div>
   );
