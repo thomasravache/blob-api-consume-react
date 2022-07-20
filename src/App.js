@@ -5,7 +5,6 @@ import { upload, readFile } from './services';
 function App() {
   const [selectedFile, setSelectedFile] = useState('');
   const [fileToRead, setFileToRead] = useState('');
-  const [readURL, setReadURL] = useState('');
 
   const handleChangeUpload = ({ target: { files } }) => {
     console.log(files);
