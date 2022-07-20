@@ -9,3 +9,5 @@ export const uploadFile = async (file) => api.post('/file/upload', file);
 export const readFile = async (fileName) => api.get(`/file/read?fileName=${fileName}`);
 
 export const downloadFile = async (fileName) => api.get(`/file/download?fileName=${fileName}`);
+
+export const deleteFile = async (fileName) => api.delete(`/file/delete?fileName=${fileName}`);
