@@ -23,8 +23,12 @@ function App() {
   }
 
   const read = async () => {
-    const { request: { responseURL } } = await readFile(fileToRead);
-    window.open(responseURL, '_blank');
+    try {
+      const { request: { responseURL } } = await readFile(fileToRead);
+      window.open(responseURL, '_blank');
+    } catch {
+      console.log('deu ruim');
+    }
   };
 
   return (
