@@ -5,7 +5,7 @@ import { upload } from './services';
 function App() {
   const [selectedFile, setSelectedFile] = useState('');
 
-  
+
   const handleChange = ({ target: { files } }) => {
     console.log(files);
     setSelectedFile(files[0]);
@@ -20,15 +20,17 @@ function App() {
 
   return (
     <div className="App">
-      <h2>React file upload Example</h2>
       <div>
-        <label>Select File</label>
-        <input type="file" name="MyFile" onChange={handleChange} />
-      </div>
-      <div>
-        <button type="button" onClick={submit}>
-          Upload
-        </button>
+        <h2>React file upload Example</h2>
+        <div>
+          <label>Select File</label>
+          <input type="file" name="MyFile" onChange={handleChange} />
+        </div>
+        <div>
+          <button type="button" onClick={submit}>
+            Upload
+          </button>
+        </div>
       </div>
     </div>
   );
